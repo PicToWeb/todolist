@@ -1,0 +1,19 @@
+{
+    "tasks": [
+      {
+        "id": "1",
+        "name": "Faire le ménage",
+        "done": false
+      },
+      {
+        "id": "2",
+        "name": "Faire du sport",
+        "done": true
+      },
+      {
+        "id": "d2c6",
+        "name": "Typescript",
+        "done": true
+      }
+    ]
+  }
