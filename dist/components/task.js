@@ -13,9 +13,11 @@ export default class Task extends Dom {
         this.name = name;
         this.done = done;
         this.parent = parent;
-        //affichage 
+        //affichage
         this.domElets = this.render(); // Affichage. on stock le retour du render dans domElets pouyr l'utiser dans manageEvents
-        this.domElets.buttonValidateElt.innerText = (this.done) ? "invalider" : "valider";
+        this.domElets.buttonValidateElt.innerText = this.done
+            ? "invalider"
+            : "valider";
         this.manageEvents(); // pour gerer les events
     }
     /**
@@ -23,12 +25,12 @@ export default class Task extends Dom {
      */
     manageEvents() {
         this.domElets.buttonDeleteElt.addEventListener("click", () => {
-            console.log('bouton delete');
+            // en mettant function le this fais reference au bouton delete
+            console.log("bouton delete");
             if (confirm("Voulez vous vraiment supprimer ?") == true) {
                 FetchData.deleteTask(this.id);
                 //this.domElets.articleElt.remove();
             }
-            ;
         });
         // Gestion du clic sur le bouton Valider / Invalider
         this.domElets.buttonValidateElt.addEventListener("click", () => {
@@ -43,27 +45,28 @@ export default class Task extends Dom {
             }
             // Gestion du label
             //this.domElets.buttonValidateElt.innerText = (this.done) ? "Valider" : "Invalider";
-            // Appel du service 
+            // Appel du service
             console.log(FetchData.loadTasks());
             FetchData.patchTask(this.id, { done: this.done });
         });
     }
     // quand je créer une tache, je l'affiche
     render() {
-        //gestion de la class pour savoir si la tache est faite ou pas 
-        const attributeClass = (this.done) ? { "class": "done" } : {};
+        // permet d'AFFICHER dans le dom ma tache, je dois savoir quel est le parent de cette tache.. on rajoute un parametre
+        //gestion de la class pour savoir si la tache est faite ou pas
+        const attributeClass = this.done ? { class: "done" } : {};
         // const inputAdd = document.querySelector("form input").value;
         // const btnForm = document.querySelector("form button");
-        const articleElt = this.createMarkup("article", "", this.parent); // on utilise this. pour appeller la fonction qui est dans l'instance.. this.createMarkup car accessible par son prototype ! 
+        const articleElt = this.createMarkup("article", "", this.parent); // on utilise this. pour appeller la fonction qui est dans l'instance.. this.createMarkup car accessible par son prototype !
         const h2Elt = this.createMarkup("h2", this.name, articleElt, attributeClass);
         // on doit pouvoir modifier => crééer des évents
         const buttonValidateElt = this.createMarkup("button", "Valider", articleElt);
         const buttonDeleteElt = this.createMarkup("button", "Supprimer", articleElt);
-        return ({
+        return {
             articleElt,
             h2Elt,
             buttonDeleteElt,
-            buttonValidateElt
-        });
+            buttonValidateElt,
+        };
     }
 }

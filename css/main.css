@@ -1,64 +1,58 @@
 .done {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 form {
-    display: flex;
-    flex-direction: row;
-    align-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 
-    button {
-        margin-left: 2.5rem;
+  button {
+    margin-left: 2.5rem;
+  }
 
-    }
-
-    input {
-        padding: 0.2rem 0rem;
-        width: 50%;
-    }
-
+  input {
+    padding: 0.2rem 0rem;
+    width: 50%;
+  }
 }
 
 button {
-    padding: 0.4rem 1.2rem;
-    border-radius: 5px;
-    border: 1px solid grey;
+  padding: 0.4rem 1.2rem;
+  border-radius: 5px;
+  border: 1px solid grey;
 }
 
 article {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    border: 1px solid black;
-    gap: 15px;
-    margin-top: 1rem;
-    padding: 0rem 1rem;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 1px solid black;
+  gap: 15px;
+  margin-top: 1rem;
+  padding: 0rem 1rem;
+  justify-content: space-between;
 
-    h2 {
-        width: 100%;
-    }
-
+  h2 {
+    width: 100%;
+  }
 }
 
-
-
-
-@media screen and (max-width:380px) {
-    form {
-        justify-content: space-around;
-    }
+@media screen and (max-width: 380px) {
+  form {
+    justify-content: space-around;
+  }
 }
 
-@media screen and (min-width:770px) {
-    h2 {
-        flex-basis: 70%;
-    }
+@media screen and (min-width: 770px) {
+  h2 {
+    flex-basis: 70%;
+  }
 
-    input {
-        flex-basis: 30%;
-    }
+  input {
+    flex-basis: 30%;
+  }
 }

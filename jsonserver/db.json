@@ -8,7 +8,7 @@
     {
       "id": "2",
       "name": "Faire du sport",
-      "done": true
+      "done": false
     },
     {
       "id": "d2c6",
@@ -23,7 +23,7 @@
     {
       "id": "09e1",
       "name": "sss",
-      "done": false
+      "done": true
     }
   ]
 }

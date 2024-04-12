@@ -3,5 +3,5 @@
 import TodoList from "./components/toDoList.js";
 
 //creation d'une todolist
- const todoList:TodoList = new TodoList();
+const todoList: TodoList = new TodoList();
 //console.log(`salut entrée`);

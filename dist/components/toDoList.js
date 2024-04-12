@@ -43,15 +43,18 @@ export default class TodoList extends Dom {
     render() {
         // const form = document.querySelector("form");
         const form = this.createMarkup("form", "", this.rootDom);
-        const label = this.createMarkup("label", "Tâche : ", form, { "for": "task" });
-        const input = this.createMarkup("input", "", form, { "id": "task", type: "text" });
-        const buttonSubmit = this.createMarkup("button", "Ajouter une tâche", form, { "id": "task", type: "submit" });
+        const label = this.createMarkup("label", "Tâche : ", form, { for: "task" });
+        const input = this.createMarkup("input", "", form, {
+            id: "task",
+            type: "text",
+        });
+        const buttonSubmit = this.createMarkup("button", "Ajouter une tâche", form, { id: "task", type: "submit" });
         //création de l'element section qui comprend toutes les taches
         const sectionListTasks = this.createMarkup("section", "", this.rootDom);
         return {
             form,
             input,
-            sectionListTasks
+            sectionListTasks,
         };
     }
     // renderTasks(tasks){
@@ -60,9 +63,11 @@ export default class TodoList extends Dom {
     //     })
     // }
     renderTasks(tasks) {
-        tasks.sort((a, b) => {
+        tasks
+            .sort((a, b) => {
             return a.done - b.done;
-        }).forEach(task => {
+        })
+            .forEach((task) => {
             new Task(task.id, task.name, task.done, this.domElts.sectionListTasks);
         });
     }
