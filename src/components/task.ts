@@ -19,9 +19,12 @@ export default class Task extends Dom {
 
         //affichage 
         this.domElets = this.render(); // Affichage. on stock le retour du render dans domElets pouyr l'utiser dans manageEvents
-
+        this.domElets.buttonValidateElt.innerText = (this.done) ? "invalider" : "valider";
         this.manageEvents(); // pour gerer les events
     }
+    /**
+     * 
+     */
     manageEvents(): void {
         this.domElets.buttonDeleteElt.addEventListener("click", () => { // en mettant function le this fais reference au bouton delete
             console.log('bouton delete');
@@ -46,9 +49,10 @@ export default class Task extends Dom {
                 this.parent.prepend(this.domElets.articleElt);
             }
             // Gestion du label
-            this.domElets.buttonValidateElt.innerText = (this.done) ? "Invalider" : "Valider";
+            //this.domElets.buttonValidateElt.innerText = (this.done) ? "Valider" : "Invalider";
 
             // Appel du service 
+            console.log(FetchData.loadTasks());
             FetchData.patchTask(this.id, { done: this.done });
         })
     }
@@ -65,7 +69,7 @@ export default class Task extends Dom {
         // on doit pouvoir modifier => crééer des évents
         const buttonValidateElt = this.createMarkup("button", "Valider", articleElt);
         const buttonDeleteElt = this.createMarkup("button", "Supprimer", articleElt);
-
+         
 
 
 

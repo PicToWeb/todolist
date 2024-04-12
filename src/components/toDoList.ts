@@ -24,6 +24,7 @@ export default class TodoList extends Dom {
             console.log(`taches dans le constructeur de TodoList`, tasks);
             console.log(`this`, this);
             this.renderTasks(tasks);
+            
         })();
 
 

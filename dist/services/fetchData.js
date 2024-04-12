@@ -19,7 +19,7 @@ export default class FetchData {
             return tasks;
         }) // si ca se passe bien j'arrive la 
             .catch(error => {
-            console.log(`Erreur attrapée` + error);
+            //console.log(`Erreur attrapée` + error);
         });
     }
     /**
@@ -49,7 +49,9 @@ export default class FetchData {
             return task;
         })
             .catch(error => {
-            console.log(`Erreur attrapée dans addTask` + error);
+            //console.log(`Erreur attrapée dans addTask` + error);
+            // alert(`Erreur lors de l'ajout, la base de donnée n'est pas reliée, l'ajout va être retiré`);
+            location.reload();
         });
     }
     static async patchTask(id, updatedTask) {

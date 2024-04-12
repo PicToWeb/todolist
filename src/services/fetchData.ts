@@ -10,7 +10,8 @@ export default class FetchData {
         return fetch(FetchData.url) // fetch = get donc récupérer
             .then(response => {
                 if (response.status != 200) {
-                    throw new Error("pb dans loadTasks")
+                    throw new Error("pb dans loadTasks");
+
                 } else return response.json();
             })
             .then(tasks => {
@@ -18,7 +19,9 @@ export default class FetchData {
                 return tasks;
             }) // si ca se passe bien j'arrive la 
             .catch(error => {
-                console.log(`Erreur attrapée` + error);
+                //console.log(`Erreur attrapée` + error);
+
+
             })
     }
     /**
@@ -40,6 +43,7 @@ export default class FetchData {
                 console.log(`status dans le post`, response.status);
                 if (response.status != 200) {
                     throw new Error("Pb dans addTask")
+                    
                 } else return response.json();
             })
             .then(task => {
@@ -47,7 +51,9 @@ export default class FetchData {
                 return task;
             })
             .catch(error => {
-                console.log(`Erreur attrapée dans addTask` + error);
+                //console.log(`Erreur attrapée dans addTask` + error);
+                // alert(`Erreur lors de l'ajout, la base de donnée n'est pas reliée, l'ajout va être retiré`);
+                location.reload();
             })
 
     }

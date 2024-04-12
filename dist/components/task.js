@@ -15,8 +15,12 @@ export default class Task extends Dom {
         this.parent = parent;
         //affichage 
         this.domElets = this.render(); // Affichage. on stock le retour du render dans domElets pouyr l'utiser dans manageEvents
+        this.domElets.buttonValidateElt.innerText = (this.done) ? "invalider" : "valider";
         this.manageEvents(); // pour gerer les events
     }
+    /**
+     *
+     */
     manageEvents() {
         this.domElets.buttonDeleteElt.addEventListener("click", () => {
             console.log('bouton delete');
@@ -38,8 +42,9 @@ export default class Task extends Dom {
                 this.parent.prepend(this.domElets.articleElt);
             }
             // Gestion du label
-            this.domElets.buttonValidateElt.innerText = (this.done) ? "Invalider" : "Valider";
+            //this.domElets.buttonValidateElt.innerText = (this.done) ? "Valider" : "Invalider";
             // Appel du service 
+            console.log(FetchData.loadTasks());
             FetchData.patchTask(this.id, { done: this.done });
         });
     }
