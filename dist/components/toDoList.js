@@ -4,6 +4,10 @@ import FetchData from "../services/fetchData.js";
 export default class TodoList extends Dom {
     rootDom;
     domElts;
+    /**
+     * Crée une instance de TodoList
+     * @memberof TodoList
+     */
     constructor() {
         super();
         // Référence à l'élément du DOM existant qui a pour id "root"
@@ -20,10 +24,15 @@ export default class TodoList extends Dom {
             this.renderTasks(tasks);
         })();
     }
+    /**
+     * Méthode permettant de s'occuper des évènements : -soumission du formulaire via submit
+     *
+     * @memberof TodoList
+     */
     manageEvents() {
         this.domElts.form.addEventListener("submit", (event) => {
             console.log(`Dans submit addEventListener`);
-            // Supprimer l'appel de la requête http via l'action du formulaire avec la méthode GET
+            // Pour supprimer l'appel de la requête http via l'action du formulaire avec la méthode GET
             event.preventDefault();
             // Récupération des données envoyées par le formulaire
             const taskName = this.domElts.input.value;
@@ -40,6 +49,12 @@ export default class TodoList extends Dom {
             }
         });
     }
+    /**
+     * Méthode permettant d'afficher la todoList dans le DOM
+     *
+     * @return form, input, sectionListTasks
+     * @memberof TodoList
+     */
     render() {
         // const form = document.querySelector("form");
         const form = this.createMarkup("form", "", this.rootDom);
@@ -57,11 +72,11 @@ export default class TodoList extends Dom {
             sectionListTasks,
         };
     }
-    // renderTasks(tasks){
-    //     tasks.forEach(task =>{
-    //         new Task(task.id,task.name,task.done,this.domElts.sectionListTask);
-    //     })
-    // }
+    /**
+     * Méthode permettant de trier et boucler les tâches
+     * @param {any[]} tasks
+     * @memberof TodoList
+     */
     renderTasks(tasks) {
         tasks
             .sort((a, b) => {

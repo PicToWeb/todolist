@@ -2,30 +2,35 @@ export default class FetchData {
   static url = "http://localhost:3000/tasks";
 
   /**
-         * VA chercher les tâches sur le serveur json-server en exécutant une requêtte http avec le verbe GET
-         
-         * @returns Promises <Tasks[]> 
-         */
+   * Méthode permettant de récupérer les tâches sur le serveur json-server en exécutant une requette http avec le verbe GET
+   * @static
+   * @return Promises <Tasks[]>
+   * @memberof FetchData
+   */
   static async loadTasks() {
-    // méhtodes qui permet de récupérer les taches
-    return fetch(FetchData.url) // fetch = get donc récupérer
+    // fetch = get donc récupérer
+    return fetch(FetchData.url)
       .then((response) => {
         if (response.status != 200) {
           throw new Error("pb dans loadTasks");
         } else return response.json();
       })
       .then((tasks) => {
+        // si il n'y a pas d'erreur
         console.log(`tasks test : `, tasks);
         return tasks;
-      }) // si ca se passe bien j'arrive la
+      })
       .catch((error) => {
         //console.log(`Erreur attrapée` + error);
       });
   }
+
   /**
-   * Ajoute une tâche sur le serveur json-server en exécutant une requêtte http avec le verbe POST
-   * @param {*} new_task
-   * @returns Promises <Task>
+   * Méthode permettant d'ajouter une tâche sur le serveur json-server en exécutant une requette http avec le verbe POST
+   * @static
+   * @param {{ name: any; done: boolean }} new_task
+   * @return Promises <Tasks[]>
+   * @memberof FetchData
    */
   static async addTask(new_task: { name: any; done: boolean }) {
     return fetch(FetchData.url, {
@@ -53,6 +58,14 @@ export default class FetchData {
       });
   }
 
+  /**
+   * Méthode permettant de modifier une tâche sur le serveur json-server en exécutant une requette http avec le verbe UPDATE
+   * @static
+   * @param {number} id
+   * @param {{ done: boolean }} updatedTask
+   * @return Promises <Tasks[]>
+   * @memberof FetchData
+   */
   static async patchTask(id: number, updatedTask: { done: boolean }) {
     return fetch(`${FetchData.url}/${id}`, {
       headers: {
@@ -77,6 +90,14 @@ export default class FetchData {
       });
   }
 
+  /**
+   * Méthode permettant de supprimer une tâche sur le serveur json-server en exécutant une requette http avec le verbe DELETE
+   * @static
+   * @param {number} id
+   * @param {void} deleteTask
+   * @return {*}
+   * @memberof FetchData
+   */
   static async deleteTask(id: number, deleteTask: void) {
     return fetch(`${FetchData.url}/${id}`, {
       headers: {

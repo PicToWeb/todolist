@@ -1,35 +1,44 @@
 import Dom from "../utils/dom.js";
 import FetchData from "../services/fetchData.js";
+// pour éviter la redondance on a deplacé la fonction createMarkup dans un autre fichier et utilisé les prototypes - class parent et enfant
 export default class Task extends Dom {
-    id; // pour eviter redondance on a deplacer la fonction create markup dans un autre fichier et utilisé les prototypes acec class parent et enfant
+    id;
     name;
     done;
     parent;
     domElets;
+    /**
+     * Méhtode permettant de créer une instance des tâches
+     * @param {number} id
+     * @param {string} name
+     * @param {boolean} done
+     * @param {*} parent
+     * @memberof Task
+     */
     constructor(id, name, done, parent) {
-        super(); // obligé de faire appel au super constructeur
-        // 3 propriete essentiel pour gérer nos taches
+        //super = super constructeur
+        super();
         this.id = id;
         this.name = name;
         this.done = done;
         this.parent = parent;
-        //affichage
-        this.domElets = this.render(); // Affichage. on stock le retour du render dans domElets pouyr l'utiser dans manageEvents
+        // Affichage. On assigne le retour du render dans domElets pour l'utiliser dans manageEvents
+        this.domElets = this.render();
         this.domElets.buttonValidateElt.innerText = this.done
             ? "invalider"
             : "valider";
-        this.manageEvents(); // pour gerer les events
+        this.manageEvents();
     }
     /**
+     * Méthode permettant de s'occuper des évènements : -clique sur bouton de suppression ou de validation/invalidation
      *
+     * @memberof Task
      */
     manageEvents() {
         this.domElets.buttonDeleteElt.addEventListener("click", () => {
-            // en mettant function le this fais reference au bouton delete
-            console.log("bouton delete");
+            // console.log("bouton delete");
             if (confirm("Voulez vous vraiment supprimer ?") == true) {
                 FetchData.deleteTask(this.id);
-                //this.domElets.articleElt.remove();
             }
         });
         // Gestion du clic sur le bouton Valider / Invalider
@@ -50,16 +59,18 @@ export default class Task extends Dom {
             FetchData.patchTask(this.id, { done: this.done });
         });
     }
-    // quand je créer une tache, je l'affiche
+    /**
+     * Méthode permettant d'afficher la tâche dans le DOM
+     *
+     * @return articleElt, h2Elt, buttonDeleteElt, buttonValidateElt,
+     * @memberof Task
+     */
     render() {
-        // permet d'AFFICHER dans le dom ma tache, je dois savoir quel est le parent de cette tache.. on rajoute un parametre
-        //gestion de la class pour savoir si la tache est faite ou pas
+        //gestion de la class pour savoir si la tâche est faite ou pas
         const attributeClass = this.done ? { class: "done" } : {};
-        // const inputAdd = document.querySelector("form input").value;
-        // const btnForm = document.querySelector("form button");
-        const articleElt = this.createMarkup("article", "", this.parent); // on utilise this. pour appeller la fonction qui est dans l'instance.. this.createMarkup car accessible par son prototype !
+        // on utilise this. pour appeller la fonction qui est dans l'instance.. this.createMarkup car accessible par son prototype !
+        const articleElt = this.createMarkup("article", "", this.parent);
         const h2Elt = this.createMarkup("h2", this.name, articleElt, attributeClass);
-        // on doit pouvoir modifier => crééer des évents
         const buttonValidateElt = this.createMarkup("button", "Valider", articleElt);
         const buttonDeleteElt = this.createMarkup("button", "Supprimer", articleElt);
         return {
